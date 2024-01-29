@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Travel Diary</string>
+    <string name="welcome_text">Welcome to Travel Diary</string>
+    <string name="are_you_new_text">Are you new to travel diary?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome_message">Welcome!</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+</resources>
