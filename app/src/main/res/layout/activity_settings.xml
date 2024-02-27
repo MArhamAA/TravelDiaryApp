@@ -1,73 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/textViewFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Full Name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SettingsActivity">
 
     <EditText
         android:id="@+id/editTextFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewFullName"
-        android:layout_marginTop="8dp"
+        android:hint="Full Name"
         android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textViewUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextFullName"
-        android:layout_marginTop="16dp"
-        android:text="Username (Email)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewUsername"
-        android:layout_marginTop="8dp"
-        android:inputType="textEmailAddress"
-        android:enabled="false" />
+        android:hint="Username"
+        android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/textViewNewPassword"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextOldPassword"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextUsername"
-        android:layout_marginTop="16dp"
-        android:text="New Password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:hint="Old Password"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/editTextNewPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewNewPassword"
-        android:layout_marginTop="8dp"
+        android:hint="New Password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/saveChangesButton"
+        android:id="@+id/buttonUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextNewPassword"
-        android:layout_marginTop="24dp"
-        android:text="Save Changes" />
+        android:text="Update" />
 
-    <Button
-        android:id="@+id/updatePasswordButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/saveChangesButton"
-        android:layout_marginTop="8dp"
-        android:text="Update Password" />
-
-</RelativeLayout>
+</LinearLayout>

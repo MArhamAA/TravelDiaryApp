@@ -64,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 //                R.id.menu_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
                 R.id.menu_logOut -> {
-                    Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
                     signOut()
                 }
             }
