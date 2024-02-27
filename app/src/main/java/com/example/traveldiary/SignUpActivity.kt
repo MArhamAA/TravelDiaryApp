@@ -111,10 +111,12 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
-        val userId = firebase.push().key!!
-        val user = UserModel(userId, username, email, fullname, password)
+//        val userId = firebase.push().key!!
+        val copy_email = email
+        val encodedEmail = copy_email.replace(".", "_dot_").replace("@", "_at_")
+        val user = UserModel(email, username, fullname, password)
 
-        firebase.child(userId).setValue(user)
+        firebase.child(encodedEmail).setValue(user)
             .addOnCompleteListener {
                 Toast.makeText(this, "You are registered", Toast.LENGTH_LONG).show()
 
