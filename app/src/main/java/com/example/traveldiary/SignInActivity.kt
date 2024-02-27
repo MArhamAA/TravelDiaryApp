@@ -1,5 +1,6 @@
 package com.example.traveldiary
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -50,12 +51,27 @@ class SignInActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(usernameEmail, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+
+                        // Save user token to local storage
                         val user = auth.currentUser
+                        user?.getIdToken(true)?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val token = task.result?.token
+                                token?.let { saveUserToken(it) }
+                                // Proceed to main activity
+                                startActivity(Intent(this, HomeActivity::class.java))
+                                finish()
+                            } else {
+                                // Handle error
+                            }
+                        }
+
+
+                        // Sign in success, update UI with the signed-in user's information
 //                        Toast.makeText(this, "Sign in with email successful.", Toast.LENGTH_SHORT).show()
                         // Update UI or navigate to the next screen
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        finish()
+//                        startActivity(Intent(this, HomeActivity::class.java))
+//                        finish()
                     } else {
                         // If sign in with email fails, try signing in with username
 
@@ -90,6 +106,12 @@ class SignInActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    // Save user token to SharedPreferences after successful sign-in
+    fun saveUserToken(token: String) {
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("userToken", token).apply()
     }
 
 

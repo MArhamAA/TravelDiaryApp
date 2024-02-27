@@ -58,9 +58,15 @@ class HomeActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
 //                R.id.menu_diary -> Toast.makeText(this, "Diary", Toast.LENGTH_SHORT).show()
-//                R.id.menu_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+                R.id.menu_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                }
 //                R.id.menu_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-                R.id.menu_logOut -> Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
+                R.id.menu_logOut -> {
+                    Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
+                    signOut()
+                }
             }
 
             true
@@ -73,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
         locationButton.setOnClickListener {
             Toast.makeText(this, "Welcome to map", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MapsActivity::class.java))
-            finish()
+//            finish()
         }
 
     }
@@ -98,11 +104,11 @@ class HomeActivity : AppCompatActivity() {
                         emailTextView.text = email
 
                         // Create and show a Toast message on the main (UI) thread
-                        val mainHandler = Handler(Looper.getMainLooper())
-                        val myRunnable = Runnable {
-                            Toast.makeText(applicationContext, "Data loaded successfully", Toast.LENGTH_SHORT).show()
-                        }
-                        mainHandler.post(myRunnable)
+//                        val mainHandler = Handler(Looper.getMainLooper())
+//                        val myRunnable = Runnable {
+//                            Toast.makeText(applicationContext, "Data loaded successfully", Toast.LENGTH_SHORT).show()
+//                        }
+//                        mainHandler.post(myRunnable)
 
                     } else {
                         val mainHandler = Handler(Looper.getMainLooper())
@@ -110,7 +116,7 @@ class HomeActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, "else loaded successfully", Toast.LENGTH_SHORT).show()
                         }
                         mainHandler.post(myRunnable)
-                        println("User data does not exist")
+//                        println("User data does not exist")
                     }
                 }
 
@@ -132,7 +138,57 @@ class HomeActivity : AppCompatActivity() {
             return true
         }
 
+        return when (item.itemId) {
+            R.id.menu_logOut -> {
+                // Handle log out menu item click
+                signOut()
+                true
+            }
+            R.id.menu_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
         return super.onOptionsItemSelected(item)
     }
+
+    private fun signOut() {
+        // Optionally clear any locally stored user data
+        clearSharedPreferences()
+
+        // Redirect to sign-in activity
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        auth.signOut()
+        startActivity(intent)
+        finish()
+    }
+
+    // Example method to clear locally stored user data
+    private fun clearSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.menu_logOut -> {
+//                // Handle log out menu item click
+//                signOut()
+//                true
+//            }
+//            R.id.menu_settings -> {
+//                val intent = Intent(this, SettingsActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
 }
