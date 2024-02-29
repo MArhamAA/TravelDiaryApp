@@ -1,100 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- activity_sign_in.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#54CDDC39">
 
     <!-- Username/Email Field -->
-
-    <!-- Password Field -->
-
-    <!-- Sign In Button -->
-
     <EditText
         android:id="@+id/usernameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="212dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="551dp"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Password Field -->
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="211dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="448dp"
         android:hint="Password"
         android:inputType="textPassword"
-        app:startIconDrawable="@drawable/password_icon"
-        app:startIconTint="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usernameEditText" />
 
+    <!-- Sign In Button -->
     <Button
         android:id="@+id/signInAuthButton"
-        android:layout_width="wrap_content"
-        android:layout_height="182dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="453dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="256dp"
         android:background="#F6EDED"
         android:text="Sign In"
         android:textColor="@color/black"
-        app:backgroundTint="@color/white" />
+        app:backgroundTint="#009688"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+    <!-- "Don’t have an account?" Text -->
+
+    <!-- "Register" Text -->
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="175dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="545dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="36dp"
         android:text="Don’t have an account?"
-        android:textSize="21sp" />
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signInAuthButton" />
 
     <TextView
         android:id="@+id/clickable_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="267dp"
-        android:layout_marginTop="547dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="170dp"
-        android:clickable="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="172dp"
         android:onClick="onTextViewClick"
         android:text="Register"
         android:textColor="#04B30B"
-        android:textSize="21sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signInAuthButton" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

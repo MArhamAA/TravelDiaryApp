@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- activity_start.xml -->
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -18,70 +17,60 @@
 
     <TextView
         android:id="@+id/welcomeMessage"
-        android:layout_width="363dp"
-        android:layout_height="260dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="574dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/welcome_text"
         android:textColor="#513203"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/areYouNewText"
-        android:layout_width="wrap_content"
-        android:layout_height="255dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="493dp"
-        android:layout_marginEnd="58dp"
-        android:layout_marginBottom="143dp"
-        android:text="@string/are_you_new_text"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/signInAuthButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="359dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="350dp"
-        android:background="#F6EDED"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="248dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/sign_in"
-        android:textColor="@color/black"
         android:textSize="20sp"
-        app:backgroundTint="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
+
+    <TextView
+        android:id="@+id/areYouNewText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/are_you_new_text"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInAuthButton" />
 
     <Button
         android:id="@+id/signUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="185dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="545dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="161dp"
-        android:background="#E8E0E0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/sign_up"
-        android:textColor="@color/black"
         android:textSize="20sp"
-        app:backgroundTint="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areYouNewText" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
