@@ -25,7 +25,7 @@
         <ImageButton
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:id="@+id/save_diary_btn"
+            android:id="@+id/save_note_btn"
             android:src="@drawable/ic_baseline_done_24"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
@@ -59,7 +59,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/diary_content_text"
+            android:id="@+id/notes_content_text"
             android:hint="Content"
             android:minLines="15"
             android:gravity="top"
