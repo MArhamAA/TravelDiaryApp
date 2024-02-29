@@ -17,7 +17,16 @@
         android:theme="@style/Theme.TravelDiary"
         tools:targetApi="31">
         <activity
+            android:name=".DiaryDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".DiaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NoteDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
@@ -42,9 +51,10 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="DuplicateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

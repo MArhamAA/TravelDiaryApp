@@ -2,39 +2,44 @@
 <!-- activity_sign_in.xml -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#54CDDC39">
+    android:background="@color/white">
 
     <!-- Username/Email Field -->
+
+    <!-- Password Field -->
+
+    <!-- Sign In Button -->
+
     <EditText
         android:id="@+id/usernameEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="116dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Password Field -->
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="30dp"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
-    <!-- Sign In Button -->
     <Button
         android:id="@+id/signInAuthButton"
         android:layout_width="0dp"
@@ -60,8 +65,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="32dp"
         android:text="Don’t have an account?"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -72,13 +77,13 @@
         android:id="@+id/clickable_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="172dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="132dp"
         android:onClick="onTextViewClick"
-        android:text="Register"
+        android:text="Create Account"
         android:textColor="#04B30B"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signInAuthButton" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

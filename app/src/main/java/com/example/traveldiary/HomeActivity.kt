@@ -121,7 +121,7 @@ class HomeActivity : AppCompatActivity() {
                     } else {
                         val mainHandler = Handler(Looper.getMainLooper())
                         val myRunnable = Runnable {
-                            Toast.makeText(applicationContext, "else loaded successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "Error in data loading", Toast.LENGTH_SHORT).show()
                         }
                         mainHandler.post(myRunnable)
 //                        println("User data does not exist")
