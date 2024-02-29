@@ -57,12 +57,18 @@ class HomeActivity : AppCompatActivity() {
 
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-//                R.id.menu_diary -> Toast.makeText(this, "Diary", Toast.LENGTH_SHORT).show()
+                R.id.menu_diary -> {
+                    val intent = Intent(this, DiaryActivity::class.java)
+                    startActivity(intent)
+                }
                 R.id.menu_settings -> {
                     val intent = Intent(this, SettingsActivity::class.java)
                     startActivity(intent)
                 }
-//                R.id.menu_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                R.id.menu_profile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
                 R.id.menu_logOut -> {
 //                    Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
                     signOut()
