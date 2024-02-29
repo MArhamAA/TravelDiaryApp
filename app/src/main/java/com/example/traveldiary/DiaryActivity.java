@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
 //import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.Query;
@@ -21,7 +22,7 @@ public class DiaryActivity extends AppCompatActivity {
     FloatingActionButton addNoteBtn;
     RecyclerView recyclerView;
     ImageButton menuBtn;
-//    NoteAdapter noteAdapter;
+    DiaryAdapter diaryAdapter;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,33 +34,33 @@ public class DiaryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyler_view);
 
         addNoteBtn.setOnClickListener((v)-> startActivity(new Intent(DiaryActivity.this, DiaryDetailsActivity.class)) );
-//        setupRecyclerView();
+        setupRecyclerView();
     }
 
-    void setupRecyclerView(){
-//        Query query  = Utility.getCollectionReferenceForNotes().orderBy("timestamp",Query.Direction.DESCENDING);
-//        FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
-//                .setQuery(query,Note.class).build();
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        noteAdapter = new NoteAdapter(options,this);
-//        recyclerView.setAdapter(noteAdapter);
+    void setupRecyclerView() {
+        Query query  = Utility.getCollectionReferenceForNotes().orderBy("timestamp",Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
+                .setQuery(query,Note.class).build();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        diaryAdapter = new DiaryAdapter(options,this);
+        recyclerView.setAdapter(diaryAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        noteAdapter.startListening();
+        diaryAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        noteAdapter.stopListening();
+        diaryAdapter.stopListening();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        noteAdapter.notifyDataSetChanged();
+        diaryAdapter.notifyDataSetChanged();
     }
 }
