@@ -46,7 +46,7 @@ class ProfileActivity : AppCompatActivity() {
         userRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val fullName = snapshot.child("fullName").value.toString()
+                    val fullName = snapshot.child("fullname").value.toString()
                     val username = snapshot.child("username").value.toString()
                     val email = user?.email
 

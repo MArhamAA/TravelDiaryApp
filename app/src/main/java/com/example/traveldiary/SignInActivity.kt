@@ -77,7 +77,7 @@ class SignInActivity : AppCompatActivity() {
 
                         // ...
 
-                        Toast.makeText(this, "Error: No such User", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Sorry, your email or password is wrong", Toast.LENGTH_SHORT).show()
                         signInWithUsername(usernameEmail, password)
                     }
                 }
@@ -90,6 +90,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signInWithUsername(usernameEmail: String, password: String) {
         startActivity(Intent(this, SignInActivity::class.java))
+        finish()
     }
 
     companion object {

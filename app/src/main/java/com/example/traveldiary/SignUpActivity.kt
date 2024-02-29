@@ -114,7 +114,7 @@ class SignUpActivity : AppCompatActivity() {
 //        val userId = firebase.push().key!!
         val copy_email = email
         val encodedEmail = copy_email.replace(".", "_dot_").replace("@", "_at_")
-        val user = UserModel(email, username, fullname, password)
+        val user = UserModel(email, username, fullname)
 
         firebase.child(encodedEmail).setValue(user)
             .addOnCompleteListener {

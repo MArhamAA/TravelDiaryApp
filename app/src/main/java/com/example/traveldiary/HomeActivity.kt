@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
@@ -15,14 +14,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.traveldiary.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import org.w3c.dom.Text
 
 class HomeActivity : AppCompatActivity() {
 
@@ -94,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
         val user = auth.currentUser
 
         if (user != null) {
-            Toast.makeText(this, "Hey user ${user.email}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Hey user ${user.email}", Toast.LENGTH_SHORT).show()
             val copy_email = user.email
             val encodedEmail = copy_email.toString().replace(".", "_dot_").replace("@", "_at_")
             val userRef =  databaseRef.child(encodedEmail)
@@ -106,8 +102,14 @@ class HomeActivity : AppCompatActivity() {
                         val navHeaderBinding = binding.homeNavView.getHeaderView(0)
                         val usernameTextView: TextView = navHeaderBinding.findViewById(R.id.nav_headerTextViewUserName)
                         val emailTextView: TextView = navHeaderBinding.findViewById(R.id.nav_headerTextViewEmail)
+
+                        val unameTextView : TextView = findViewById(R.id.usernameTextView)
+                        val eTextView : TextView = findViewById(R.id.emailTextView)
+
                         usernameTextView.text = username
+                        unameTextView.text = username
                         emailTextView.text = email
+                        eTextView.text = email
 
                         // Create and show a Toast message on the main (UI) thread
 //                        val mainHandler = Handler(Looper.getMainLooper())
@@ -131,7 +133,7 @@ class HomeActivity : AppCompatActivity() {
                 }
             })
         } else {
-            println("User not authenticated")
+//            println("User not authenticated")
             Toast.makeText(this, "Error: No such User", Toast.LENGTH_SHORT).show()
         }
     }
