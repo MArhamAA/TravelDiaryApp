@@ -27,13 +27,13 @@ public class DiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_diary);
 
         addNoteBtn = findViewById(R.id.add_diary_btn);
         recyclerView = findViewById(R.id.recyler_view);
 
         addNoteBtn.setOnClickListener((v)-> startActivity(new Intent(DiaryActivity.this, DiaryDetailsActivity.class)) );
-        setupRecyclerView();
+//        setupRecyclerView();
     }
 
     void setupRecyclerView(){
