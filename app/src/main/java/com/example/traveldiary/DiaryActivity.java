@@ -7,21 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ImageButton;
-import android.widget.PopupMenu;
 
-//import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.Query;
 
 public class DiaryActivity extends AppCompatActivity {
 
     FloatingActionButton addNoteBtn;
     RecyclerView recyclerView;
-    ImageButton menuBtn;
     DiaryAdapter diaryAdapter;
 
     @SuppressLint("MissingInflatedId")
@@ -31,7 +25,7 @@ public class DiaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diary);
 
         addNoteBtn = findViewById(R.id.add_diary_btn);
-        recyclerView = findViewById(R.id.recyler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         addNoteBtn.setOnClickListener((v)-> startActivity(new Intent(DiaryActivity.this, DiaryDetailsActivity.class)) );
         setupRecyclerView();

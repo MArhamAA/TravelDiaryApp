@@ -21,16 +21,6 @@ public class DiaryAdapter extends FirestoreRecyclerAdapter<Note, DiaryAdapter.No
         this.context = context;
     }
 
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public DiaryAdapter(@NonNull FirestoreRecyclerOptions<Note> options) {
-        super(options);
-    }
-
     @Override
     protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull Note note) {
         holder.titleTextView.setText(note.title);
@@ -38,7 +28,7 @@ public class DiaryAdapter extends FirestoreRecyclerAdapter<Note, DiaryAdapter.No
         holder.timestampTextView.setText(Utility.timestampToString(note.timestamp));
 
         holder.itemView.setOnClickListener((v)->{
-            Intent intent = new Intent(context,DiaryDetailsActivity.class);
+            Intent intent = new Intent(context, DiaryDetailsActivity.class);
             intent.putExtra("title",note.title);
             intent.putExtra("content",note.content);
             String docId = this.getSnapshots().getSnapshot(position).getId();
