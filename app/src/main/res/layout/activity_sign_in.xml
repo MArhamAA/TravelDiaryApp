@@ -7,12 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Username/Email Field -->
-
-    <!-- Password Field -->
-
-    <!-- Sign In Button -->
-
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="350dp"
@@ -39,6 +33,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+
 
     <Button
         android:id="@+id/signInAuthButton"

@@ -60,12 +60,20 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    // firebase
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
-
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
     implementation("com.google.firebase:firebase-analytics")
+
+    // circular img
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // scalable size
+    implementation ("com.intuit.sdp:sdp-android:1.1.0")
+    implementation ("com.intuit.ssp:ssp-android:1.1.0")
+
+    // recyclerview
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
 //    implementation ("com.android.support:multidex:1.0.3")
 
