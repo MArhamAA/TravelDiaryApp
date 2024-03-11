@@ -1,4 +1,4 @@
-package com.example.traveldiary
+package com.example.traveldiary.entities
 
 data class UserModel(
     var email: String? = null,

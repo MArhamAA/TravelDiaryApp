@@ -1,4 +1,4 @@
-package com.example.traveldiary
+package com.example.traveldiary.activities
 
 import android.content.pm.PackageManager
 import android.location.Location

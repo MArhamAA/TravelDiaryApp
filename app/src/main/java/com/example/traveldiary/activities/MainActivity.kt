@@ -1,6 +1,6 @@
 // BISMILLAH
 
-package com.example.traveldiary
+package com.example.traveldiary.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseApp
 
 import android.content.Intent
 import android.widget.Button
+import com.example.traveldiary.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

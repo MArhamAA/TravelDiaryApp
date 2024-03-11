@@ -1,4 +1,4 @@
-package com.example.traveldiary;
+package com.example.traveldiary.entities;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -13,11 +13,11 @@ import java.text.SimpleDateFormat;
 
 public class Utility {
 
-    static void showToast(Context context,String message){
+    public static void showToast(Context context, String message){
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 
-    static CollectionReference getCollectionReferenceForNotes(){
+    public static CollectionReference getCollectionReferenceForNotes(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         return FirebaseFirestore.getInstance().collection("Diary")
                 .document(currentUser.getUid()).collection("travel_diary");

@@ -1,4 +1,4 @@
-package com.example.traveldiary
+package com.example.traveldiary.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,10 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import com.example.traveldiary.SignInActivity.Companion.auth
+import com.example.traveldiary.R
+import com.example.traveldiary.entities.UserModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
