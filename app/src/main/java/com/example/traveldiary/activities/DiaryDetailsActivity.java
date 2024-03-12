@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.traveldiary.database.NoteDataBase;
 import com.example.traveldiary.entities.Note;
 import com.example.traveldiary.R;
 import com.example.traveldiary.entities.Utility;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +26,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
 
     private EditText inputNoteTitle, inputNoteSubtitle, inputNoteText;
     private TextView textDateTime;
+
+    private String selectedNoteColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,10 @@ public class DiaryDetailsActivity extends AppCompatActivity {
                 saveNote();
             }
         });
+
+        selectedNoteColor = "#333333";
+
+        initMiscellaneous();
 
     }
 
@@ -84,6 +92,21 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         new SaveNoteTask().execute();
 
         Utility.showToast(this, "Diary added successfully");
+    }
+
+    private void initMiscellaneous() {
+        final LinearLayout layoutMisc = findViewById(R.id.layoutMisc);
+        final BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(layoutMisc);
+        layoutMisc.findViewById(R.id.textMisc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                } else {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+        });
     }
 
 }
