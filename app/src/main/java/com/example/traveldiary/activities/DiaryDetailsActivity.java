@@ -47,6 +47,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
+    private Note alreadyAvailableNote;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +79,14 @@ public class DiaryDetailsActivity extends AppCompatActivity {
 
         selectedNoteColor = "#333333";
 
+        
+
         initMiscellaneous();
         setSubtitleIndicatorColor();
 
     }
+
+
 
     private void saveNote() {
         if (inputNoteTitle.getText().toString().trim().isEmpty()) {

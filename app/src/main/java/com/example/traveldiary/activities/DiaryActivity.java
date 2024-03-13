@@ -17,17 +17,21 @@ import com.example.traveldiary.R;
 import com.example.traveldiary.adapters.NotesAdapter;
 import com.example.traveldiary.database.NoteDataBase;
 import com.example.traveldiary.entities.Note;
+import com.example.traveldiary.listeners.NotesListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiaryActivity extends AppCompatActivity {
+public class DiaryActivity extends AppCompatActivity implements NotesListener {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    public static final int REQUEST_CODE_UPDATE_NOTE = 2;
     ImageView addNoteBtn;
     private RecyclerView notesRecyclerView;
     private List<Note> noteList;
     private NotesAdapter notesAdapter;
+
+    private int noteClickedPosition = -1;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -54,10 +58,19 @@ public class DiaryActivity extends AppCompatActivity {
         );
 
         noteList = new ArrayList<>();
-        notesAdapter = new NotesAdapter(noteList);
+        notesAdapter = new NotesAdapter(noteList, this);
         notesRecyclerView.setAdapter(notesAdapter);
 
         getNotes();
+    }
+
+    @Override
+    public void onNoteClicked(Note note, int position) {
+        noteClickedPosition = position;
+        Intent intent = new Intent(getApplicationContext(), DiaryDetailsActivity.class);
+        intent.putExtra("isViewOrUpdate", true);
+        intent.putExtra("note",note);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
     private void getNotes() {
