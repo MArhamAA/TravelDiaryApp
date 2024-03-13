@@ -10,6 +10,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -29,6 +30,7 @@ import com.example.traveldiary.entities.Note;
 import com.example.traveldiary.R;
 import com.example.traveldiary.entities.Utility;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firestore.v1.CursorOrBuilder;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,7 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     private ImageView imageNote;
 
     private String selectedNoteColor;
+    private String selectedImagePath;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
@@ -78,15 +81,31 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         });
 
         selectedNoteColor = "#333333";
+        selectedImagePath = "";
 
-        
+        if (getIntent().getBooleanExtra("isViewOrUpdate", false)) {
+            alreadyAvailableNote = (Note) getIntent().getSerializableExtra("note");
+            setViewOrUpdateNote();
+        }
 
         initMiscellaneous();
         setSubtitleIndicatorColor();
 
     }
 
+    private void setViewOrUpdateNote() {
+        inputNoteTitle.setText(alreadyAvailableNote.getTitle());
+        inputNoteSubtitle.setText(alreadyAvailableNote.getSubtitle());
+        inputNoteText.setText(alreadyAvailableNote.getNoteText());
+        textDateTime.setText(alreadyAvailableNote.getDateTime());
 
+        if (alreadyAvailableNote.getImagePath() != null && !alreadyAvailableNote.getImagePath().trim().isEmpty()) {
+            imageNote.setImageBitmap(BitmapFactory.decodeFile(alreadyAvailableNote.getImagePath()));
+            imageNote.setVisibility(View.VISIBLE);
+            selectedImagePath = alreadyAvailableNote.getImagePath();
+        }
+
+    }
 
     private void saveNote() {
         if (inputNoteTitle.getText().toString().trim().isEmpty()) {
@@ -100,6 +119,11 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         note.setNoteText(inputNoteText.getText().toString());
         note.setDateTime(textDateTime.getText().toString());
         note.setColor(selectedNoteColor);
+        note.setImagePath(selectedImagePath);
+
+        if (alreadyAvailableNote != null) {
+            note.setId(alreadyAvailableNote.getId());
+        }
 
         @SuppressLint("StaticFieldLeak")
         class SaveNoteTask extends AsyncTask<Void, Void, Void> {
@@ -207,6 +231,23 @@ public class DiaryDetailsActivity extends AppCompatActivity {
             }
         });
 
+        if (alreadyAvailableNote != null && alreadyAvailableNote.getColor() != null && !alreadyAvailableNote.getColor().trim().isEmpty()) {
+            switch (alreadyAvailableNote.getColor()) {
+                case "#FDBE3E":
+                    layoutMisc.findViewById(R.id.viewColor2).performClick();
+                    break;
+                case "#FF4842":
+                    layoutMisc.findViewById(R.id.viewColor3).performClick();
+                    break;
+                case "#3A5AFC":
+                    layoutMisc.findViewById(R.id.viewColor4).performClick();
+                    break;
+                case "#000000":
+                    layoutMisc.findViewById(R.id.viewColor5).performClick();
+                    break;
+            }
+        }
+
         layoutMisc.findViewById(R.id.layoutAddImg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,6 +305,9 @@ public class DiaryDetailsActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         imageNote.setImageBitmap(bitmap);
                         imageNote.setVisibility(View.VISIBLE);
+
+                        selectedImagePath = getPathFromUri(selectedImageUri);
+
                     } catch (Exception exception) {
                         Utility.showToast(this, exception.toString());
                     }
@@ -271,4 +315,21 @@ public class DiaryDetailsActivity extends AppCompatActivity {
             }
         }
     }
+
+    private String getPathFromUri(Uri contentUri) {
+        String filePath;
+        Cursor cursor = getContentResolver()
+                .query(contentUri, null, null, null, null);
+
+        if (cursor == null) {
+            filePath = contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex("_data");
+            filePath = cursor.getString(index);
+            cursor.close();
+        }
+        return filePath;
+    }
+
 }
