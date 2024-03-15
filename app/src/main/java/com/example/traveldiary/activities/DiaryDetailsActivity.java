@@ -104,6 +104,18 @@ public class DiaryDetailsActivity extends AppCompatActivity {
             }
         });
 
+        if (getIntent().getBooleanExtra("isFromQuickActions", false)) {
+            String type = getIntent().getStringExtra("quickActionType");
+            if (type != null) {
+                if (type.equals("image")) {
+                    selectedImagePath = getIntent().getStringExtra("imagePath");
+                    imageNote.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath));
+                    imageNote.setVisibility(View.VISIBLE);
+                    findViewById(R.id.imageRemoveImage).setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
         initMiscellaneous();
         setSubtitleIndicatorColor();
 
