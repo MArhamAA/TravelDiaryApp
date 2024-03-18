@@ -182,7 +182,7 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     // User registration failed
                     val exception = task.exception
-                    Toast.makeText(this, "Registration failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "This email already in use", Toast.LENGTH_SHORT).show()
                 }
             }
     }

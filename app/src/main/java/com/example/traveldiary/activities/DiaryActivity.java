@@ -30,6 +30,8 @@ import com.example.traveldiary.adapters.NotesAdapter;
 import com.example.traveldiary.database.NoteDataBase;
 import com.example.traveldiary.entities.Note;
 import com.example.traveldiary.listeners.NotesListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +50,17 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
 
     private int noteClickedPosition = -1;
 
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         addNoteBtn = findViewById(R.id.addNote);
         notesRecyclerView = findViewById(R.id.notesRecyclerView);
@@ -64,6 +72,7 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
                         new Intent(getApplicationContext(), DiaryDetailsActivity.class),
                         REQUEST_CODE_ADD_NOTE
                 );
+                finish();
             }
         });
 
@@ -98,69 +107,6 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
             }
         });
 
-        findViewById(R.id.imageAddNote).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(
-                        new Intent(getApplicationContext(), DiaryDetailsActivity.class),
-                        REQUEST_CODE_ADD_NOTE
-                );
-            }
-        });
-
-        findViewById(R.id.imageAddImage).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(
-                        getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE
-                ) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(
-                            DiaryActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            REQUEST_CODE_STORAGE_PERMISSION
-                    );
-                } else {
-                    selectImage();
-                }
-            }
-        });
-
-    }
-
-    private void selectImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_STORAGE_PERMISSION && grantResults.length > 0) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                selectImage();
-//            } else {
-//                Utility.showToast(this, "Permission denied");
-//            }
-            selectImage();
-        }
-    }
-
-    private String getPathFromUri(Uri contentUri) {
-        String filePath;
-        Cursor cursor = getContentResolver()
-                .query(contentUri, null, null, null, null);
-
-        if (cursor == null) {
-            filePath = contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex("_data");
-            filePath = cursor.getString(index);
-            cursor.close();
-        }
-        return filePath;
     }
 
     @Override
@@ -168,7 +114,7 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
         noteClickedPosition = position;
         Intent intent = new Intent(getApplicationContext(), DiaryDetailsActivity.class);
         intent.putExtra("isViewOrUpdate", true);
-        intent.putExtra("note",note);
+        intent.putExtra("note", note);
         startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
@@ -179,7 +125,7 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
             protected List<Note> doInBackground(Void... voids) {
                 return NoteDataBase
                         .getDatabase(getApplicationContext())
-                        .noteDao().getAllNotes();
+                        .noteDao().getNotesByEmail(user.getEmail());
             }
 
             @Override
@@ -215,22 +161,6 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
         } else if (requestCode == REQUEST_CODE_UPDATE_NOTE && resultCode == RESULT_OK) {
             if (data != null) {
                 getNotes(REQUEST_CODE_UPDATE_NOTE, data.getBooleanExtra("isNoteDeleted", false));
-            }
-        } else if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK) {
-            if (data != null) {
-                Uri selectedImageUri = data.getData();
-                if (selectedImageUri != null) {
-                    try {
-                        String selectedImagePath = getPathFromUri(selectedImageUri);
-                        Intent intent = new Intent(getApplicationContext(), DiaryDetailsActivity.class);
-                        intent.putExtra("isFromQuickActions", true);
-                        intent.putExtra("quickActionType", "image");
-                        intent.putExtra("imagePath", selectedImagePath);
-                        startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
-                    } catch (Exception exception) {
-                        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
             }
         }
     }

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,36 +18,45 @@
         android:theme="@style/Theme.TravelDiary"
         tools:targetApi="31">
         <activity
-            android:name=".activities.DiaryDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
+            android:name=".activities.ImagesActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DiaryActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
+            android:name=".activities.ImagesUploadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ImageUploadActivity"
             android:exported="false" />
         <activity
             android:name=".activities.DiaryDetailsActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.DiaryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.DiaryDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             tools:ignore="DuplicateActivity" />
         <activity
             android:name=".activities.MainActivity"
-            android:windowSoftInputMode="stateHidden"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.ProfileActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.SettingsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.MapsActivity"
             android:exported="false"
@@ -56,18 +65,18 @@
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.SignInActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.HomeActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"

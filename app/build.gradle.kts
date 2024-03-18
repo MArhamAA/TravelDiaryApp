@@ -58,14 +58,16 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.10.2")
     implementation("androidx.room:room-common:2.6.1")
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.firebase:firebase-analytics")
+
     // firebase
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
-    implementation("com.google.firebase:firebase-analytics")
 
     // circular img
     implementation("de.hdodenhof:circleimageview:3.1.0")
@@ -79,5 +81,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
 
 //    implementation ("com.android.support:multidex:1.0.3")
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
 }

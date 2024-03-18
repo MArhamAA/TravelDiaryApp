@@ -10,15 +10,18 @@ import java.io.Serializable;
 public class Note implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "title")
-    private String title;
+
+    @ColumnInfo(name = "user_email")
+    private String userEmail;  // firebase auth
 
     @ColumnInfo(name = "date_time")
     private String dateTime;
 
+    @ColumnInfo(name = "title")
+    private String title;
+
     @ColumnInfo(name = "subtitle")
     private String subtitle;
-
     @ColumnInfo(name = "note_text")
     private String noteText;
 
@@ -34,6 +37,14 @@ public class Note implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getTitle() {

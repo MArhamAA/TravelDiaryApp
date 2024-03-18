@@ -97,6 +97,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
             } else {
                 gradientDrawable.setColor(Color.parseColor("#333333"));
             }
+
         }
 
     }

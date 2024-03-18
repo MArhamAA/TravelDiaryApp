@@ -3,6 +3,7 @@ package com.example.traveldiary.entities;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.traveldiary.adapters.NotesAdapter;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

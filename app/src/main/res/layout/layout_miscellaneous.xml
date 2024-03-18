@@ -163,7 +163,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/ubuntu_medium"
             android:includeFontPadding="false"
-            android:text="Add image"
+            android:text="Add/View image"
             android:textColor="@color/colorIcons"
             android:textSize="@dimen/_12ssp"/>
 

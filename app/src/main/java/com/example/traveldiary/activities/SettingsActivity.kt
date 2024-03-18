@@ -43,6 +43,9 @@ class SettingsActivity : AppCompatActivity() {
         // Set click listener for update button
         findViewById<Button>(R.id.buttonUpdate).setOnClickListener {
             updateUserInformation()
+            editTextFullName.setText("")
+            editTextUsername.setText("")
+            editTextNewPassword.setText("")
         }
     }
 
@@ -76,6 +79,11 @@ class SettingsActivity : AppCompatActivity() {
         val oldPassword = editTextOldPassword.text.toString().trim()
         val newPassword = editTextNewPassword.text.toString().trim()
 
+        if (oldPassword.isEmpty()) {
+            Toast.makeText(this, "Provide the old password to make updates", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Update user information in Firebase Authentication
         val user = auth.currentUser
 
@@ -89,30 +97,38 @@ class SettingsActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val newData = HashMap<String, Any>()
-                        newData["fullname"] = fullName
-                        newData["username"] = username
-                        newData["password"] = newPassword
+                        if (fullName.isNotEmpty()) newData["fullname"] = fullName
+                        if (username.isNotEmpty()) newData["username"] = username
+                        if (newPassword.length >= 6) newData["password"] = newPassword
 
-                        userRef.updateChildren(newData)
-                            .addOnSuccessListener {
-                                // Data updated successfully
-                                Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show()
-                            }
-                            .addOnFailureListener { e ->
-                                // Failed to update data
-                                Toast.makeText(this, "Failed to update data: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-
-                        user.updatePassword(newPassword)
-                            ?.addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    // Password updated successfully
-                                    Toast.makeText(this, "Pass Updated successfully", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    // Failed to update password
-                                    Toast.makeText(this, "Failed to update: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        if (fullName.isNotEmpty() || username.isNotEmpty() || newPassword.length >= 6) {
+                            userRef.updateChildren(newData)
+                                .addOnSuccessListener {
+                                    // Data updated successfully
+                                    Toast.makeText(this, "Updated successfully", Toast.LENGTH_SHORT).show()
                                 }
-                            }
+                                .addOnFailureListener { e ->
+                                    // Failed to update data
+                                    Toast.makeText(this, "Failed to update data: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        } else if (newPassword.isEmpty()) {
+                            Toast.makeText(this, "Nothing to update", Toast.LENGTH_SHORT).show()
+                        }
+
+                        if (newPassword.length >= 6) {
+                            user.updatePassword(newPassword)
+                                ?.addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        // Password updated successfully
+//                                        Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        // Failed to update password
+                                        Toast.makeText(this, "Failed to update: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                        } else if (newPassword.isNotEmpty()) {
+                            Toast.makeText(this, "New password must be at least 6 characters long", Toast.LENGTH_SHORT).show()
+                        }
 
 //                        Toast.makeText(this, "Error: Wrong Password", Toast.LENGTH_SHORT).show()
                     } else {
@@ -120,7 +136,7 @@ class SettingsActivity : AppCompatActivity() {
 
                         // ...
 
-                        Toast.makeText(this, "Error: Wrong Password", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Please provide the correct old password", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
