@@ -37,6 +37,10 @@ import com.example.traveldiary.entities.Utility;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -84,6 +88,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
                         .format(new Date())
         );
 
+        diary_id = 0;
+
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +108,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
 
         initMiscellaneous();
         setSubtitleIndicatorColor();
+
+        updateImagesWithDiaryId(String.valueOf(diary_id));
 
     }
 
@@ -341,5 +349,31 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         intent.putExtra("diary_id", String.valueOf(diary_id));
         startActivity(intent);
     }
+
+    private void updateImagesWithDiaryId(String newDiaryId) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        CollectionReference imagesCollection = firestore.collection("images");
+
+        // Query images with diary_id = "0"
+        imagesCollection.whereEqualTo("diary_id", "0")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        // Update the diary_id field with the newDiaryId
+                        DocumentReference imageRef = imagesCollection.document(document.getId());
+                        imageRef.update("diary_id", newDiaryId)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Handle success
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Handle failure
+                                });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                });
+    }
+
 
 }

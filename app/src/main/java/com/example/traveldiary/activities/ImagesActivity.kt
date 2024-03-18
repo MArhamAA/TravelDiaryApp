@@ -49,7 +49,7 @@ class ImagesActivity : AppCompatActivity() {
             .get().addOnSuccessListener {
                 for(i in it){
                     if (i.data["user_id"] != user.uid.toString()) continue
-                    if (i.data["diary_id"] != diaryId) continue
+                    if (i.data["diary_id"] != diaryId && diaryId.isNotEmpty()) continue
                     mList.add(i.data["img"].toString())
                 }
                 adapter.notifyDataSetChanged()
