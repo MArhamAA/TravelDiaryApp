@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activities.DiaryActivity">
+    tools:context=".activities.OtherSharedDiariesActivity">
 
     <TextView
         android:id="@+id/textMyNotes"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
         android:includeFontPadding="false"
-        android:text="My Diaries"
+        android:text="Other Shared Diaries"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -80,24 +80,9 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/_15sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+        app:layout_constraintBottom_toBottomOf="parent">
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/addNote"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:background="@drawable/background_add_button"
-        android:contentDescription="@string/app_name"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_baseline_add_24"
-        app:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@id/layoutSearchByColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/layoutSearchByColor" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

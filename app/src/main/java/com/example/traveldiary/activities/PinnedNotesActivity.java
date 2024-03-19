@@ -26,43 +26,28 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiaryActivity extends AppCompatActivity implements NotesListener {
+public class PinnedNotesActivity extends AppCompatActivity implements NotesListener {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
     public static final int REQUEST_CODE_UPDATE_NOTE = 2;
     public static final int REQUEST_CODE_SHOW_NOTES = 3;
-    ImageView addNoteBtn;
     private RecyclerView notesRecyclerView;
     private List<Note> noteList;
     private NotesAdapter notesAdapter;
 
-    private int noteClickedPosition = -1;
-
-    private FirebaseAuth auth;
     private FirebaseUser user;
+
+    private int noteClickedPosition = -1;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diary);
+        setContentView(R.layout.activity_pinned_notes);
 
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-
-        addNoteBtn = findViewById(R.id.addNote);
         notesRecyclerView = findViewById(R.id.notesRecyclerView);
 
-        addNoteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(
-                        new Intent(getApplicationContext(), DiaryDetailsActivity.class),
-                        REQUEST_CODE_ADD_NOTE
-                );
-                finish();
-            }
-        });
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         notesRecyclerView = findViewById(R.id.notesRecyclerView);
         notesRecyclerView.setLayoutManager(
@@ -113,7 +98,7 @@ public class DiaryActivity extends AppCompatActivity implements NotesListener {
             protected List<Note> doInBackground(Void... voids) {
                 return NoteDataBase
                         .getDatabase(getApplicationContext())
-                        .noteDao().getNotesByEmail(user.getEmail());
+                        .noteDao().getPinnedNotes(true, user.getEmail());
             }
 
             @Override

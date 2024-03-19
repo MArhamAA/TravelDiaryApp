@@ -61,6 +61,18 @@ class HomeActivity : AppCompatActivity() {
                     val intent = Intent(this, DiaryActivity::class.java)
                     startActivity(intent)
                 }
+                R.id.menu_pinned_diary -> {
+                    val intent = Intent(this, PinnedNotesActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menu_shared_diary -> {
+                    val intent = Intent(this, MySharedDiariesActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menu_other_shared_diary -> {
+                    val intent = Intent(this, OtherSharedDiariesActivity::class.java)
+                    startActivity(intent)
+                }
                 R.id.menu_settings -> {
                     val intent = Intent(this, SettingsActivity::class.java)
                     startActivity(intent)

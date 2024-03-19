@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.traveldiary.dao.NoteDao;
 import com.example.traveldiary.entities.Note;
 
-@Database(entities = {Note.class}, version = 2, exportSchema = false)
+@Database(entities = {Note.class}, version = 3, exportSchema = false)
 public abstract class NoteDataBase extends RoomDatabase {
 
     public abstract NoteDao noteDao();
@@ -24,13 +24,13 @@ public abstract class NoteDataBase extends RoomDatabase {
                             context.getApplicationContext(),
                             NoteDataBase.class,
                             "notes_db"
-                    ).addMigrations(MIGRATION_1_2)
+                    ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build();
         }
         return notesDatabase;
     }
 
-    // Define your migration from version 1 to version 2
+    // Define migration from version 1 to version 2
     private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
@@ -38,4 +38,14 @@ public abstract class NoteDataBase extends RoomDatabase {
             database.execSQL("ALTER TABLE notes ADD COLUMN user_email TEXT");
         }
     };
+
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Add new columns to the table
+            database.execSQL("ALTER TABLE notes ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE notes ADD COLUMN shared INTEGER NOT NULL DEFAULT 0");
+        }
+    };
+
 }

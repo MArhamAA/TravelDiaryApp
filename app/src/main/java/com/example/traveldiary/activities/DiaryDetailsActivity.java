@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.traveldiary.dao.NoteDao;
 import com.example.traveldiary.database.NoteDataBase;
 import com.example.traveldiary.entities.Note;
 import com.example.traveldiary.R;
@@ -55,6 +56,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
 
     private String selectedNoteColor;
 
+    private NoteDataBase dataBase;
+
     private int diary_id;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
@@ -62,6 +65,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     private AlertDialog dialogDeleteNote;
 
     private Note alreadyAvailableNote;
+
+    private boolean pinStatus = false, shareStatus = false;
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -119,6 +124,26 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         inputNoteText.setText(alreadyAvailableNote.getNoteText());
         textDateTime.setText(alreadyAvailableNote.getDateTime());
 
+        pinStatus = alreadyAvailableNote.isPinned();
+        shareStatus = alreadyAvailableNote.isShared();
+
+        final LinearLayout layoutMisc = findViewById(R.id.layoutMisc);
+        TextView pinText = layoutMisc.findViewById(R.id.layoutPinText);
+
+        if (pinStatus) {
+            pinText.setText("Unpin this diary");
+        } else {
+            pinText.setText("Pin this diary");
+        }
+
+        TextView shareText = layoutMisc.findViewById(R.id.layoutShareText);
+
+        if (shareStatus == false) {
+            shareText.setText("Share this diary");
+        } else {
+            shareText.setText("Stop sharing this diary");
+        }
+
     }
 
     private void saveNote() {
@@ -165,6 +190,9 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     private void initMiscellaneous() {
         final LinearLayout layoutMisc = findViewById(R.id.layoutMisc);
         final BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(layoutMisc);
+
+        TextView pinText = layoutMisc.findViewById(R.id.layoutPinText);
+
         layoutMisc.findViewById(R.id.textMisc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -281,6 +309,25 @@ public class DiaryDetailsActivity extends AppCompatActivity {
                     showDeleteNoteDialog();
                 }
             });
+
+            layoutMisc.findViewById(R.id.layoutPin).setVisibility(View.VISIBLE);
+            layoutMisc.findViewById(R.id.layoutPin).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    pinNote();
+                }
+            });
+
+            layoutMisc.findViewById(R.id.layoutShare).setVisibility(View.VISIBLE);
+            layoutMisc.findViewById(R.id.layoutShare).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    shareNote();
+                }
+            });
+
         }
 
     }
@@ -348,6 +395,72 @@ public class DiaryDetailsActivity extends AppCompatActivity {
 //        Toast.makeText(this, "Diary ID: " + diary_id, Toast.LENGTH_SHORT).show();
         intent.putExtra("diary_id", String.valueOf(diary_id));
         startActivity(intent);
+    }
+
+    private void pinNote() {
+        pinStatus = alreadyAvailableNote.isPinned();
+        Note updatedNote = alreadyAvailableNote;
+//        Toast.makeText(this, "HERE "+alreadyAvailableNote.getId(), Toast.LENGTH_SHORT).show();
+        if (!pinStatus) {
+            // Pin the note
+            updatedNote.setPinned(true);
+            Toast.makeText(this, "Pinned", Toast.LENGTH_SHORT).show();
+        } else {
+            // Unpin the note
+            updatedNote.setPinned(false);
+            Toast.makeText(this, "Unpinned", Toast.LENGTH_SHORT).show();
+        }
+
+        @SuppressLint("StaticFieldLeak")
+        class UpdateNoteTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                NoteDataBase.getDatabase(getApplicationContext()).noteDao().updateNote(updatedNote);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
+        new UpdateNoteTask().execute();
+    }
+
+    private void shareNote() {
+        shareStatus = alreadyAvailableNote.isShared();
+        Note updatedNote = alreadyAvailableNote;
+//        Toast.makeText(this, "HERE "+alreadyAvailableNote.getId(), Toast.LENGTH_SHORT).show();
+        if (!shareStatus) {
+            // Pin the note
+            updatedNote.setShared(true);
+            Toast.makeText(this, "Shared", Toast.LENGTH_SHORT).show();
+        } else {
+            // Unpin the note
+            updatedNote.setShared(false);
+            Toast.makeText(this, "Sharing stopped", Toast.LENGTH_SHORT).show();
+        }
+
+        @SuppressLint("StaticFieldLeak")
+        class UpdateNoteTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                NoteDataBase.getDatabase(getApplicationContext()).noteDao().updateNote(updatedNote);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
+        new UpdateNoteTask().execute();
     }
 
     private void updateImagesWithDiaryId(String newDiaryId) {

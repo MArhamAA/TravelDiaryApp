@@ -31,6 +31,12 @@ public class Note implements Serializable {
     @ColumnInfo(name = "color")
     private String color;
 
+    @ColumnInfo(name = "pinned")
+    private boolean pinned = false;
+
+    @ColumnInfo(name = "shared")
+    private boolean shared = false;
+
     public int getId() {
         return id;
     }
@@ -93,6 +99,22 @@ public class Note implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean isPinned() {
+        return pinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
+    }
+
+    public boolean isShared() {
+        return shared;
+    }
+
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     @NonNull
