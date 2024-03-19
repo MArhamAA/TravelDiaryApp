@@ -42,17 +42,7 @@ Welcome to the Travel Diary Android App, a project developed by [Md. Mazharul Is
 3. **No Password Recovery:** Currently, there is no mechanism for password recovery.
 4. **No Content Recovery:** Deleted content cannot be recovered.
 
-### Some snapshots of the project
-
-![entry](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\app-entry-page-first-time.jpg)
-
-![home](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\home-page-after-user-login.jpg)
-
-![navigation-options](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\home-page-navigation-options.jpg)
-
-![diary](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\my-diaries.jpg)
-
-![diary-features](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\diary-features.jpg)
+### Some snapshots of the project would be found inside _app-ui-snapshots_ folder
 
 ### Prerequisites
 
