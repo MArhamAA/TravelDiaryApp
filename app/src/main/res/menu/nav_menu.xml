@@ -5,19 +5,34 @@
     tools:showIn="navigation_view">
 
     <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile"/>
+
+    <item
         android:id="@+id/menu_diary"
         android:icon="@drawable/diary_icon"
         android:title="Diary" />
 
     <item
+        android:id="@+id/menu_pinned_diary"
+        android:icon="@drawable/ic_pin"
+        android:title="Pinned Diaries" />
+
+    <item
+        android:id="@+id/menu_shared_diary"
+        android:icon="@drawable/ic_share"
+        android:title="My Shared Diaries" />
+
+    <item
+        android:id="@+id/menu_other_shared_diary"
+        android:icon="@drawable/ic_share"
+        android:title="Diaries shared by others"/>
+
+    <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/settings_icon"
         android:title="Settings" />
-
-    <item
-        android:id="@+id/menu_profile"
-        android:icon="@drawable/profile_icon"
-        android:title="Profile"/>
 
     <item
         android:id="@+id/menu_logOut"

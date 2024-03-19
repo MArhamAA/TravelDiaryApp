@@ -4,70 +4,86 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#54CDDC39">
+    android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/sign_up_icon"
+        android:layout_width="129dp"
+        android:layout_height="95dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="32dp"
+        android:src="@drawable/sign_up" />
 
     <EditText
-        android:id="@+id/usernameEditText"
-        android:layout_width="387dp"
-        android:layout_height="220dp"
+        android:id="@+id/fullNameEditText"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="182dp"
-        android:layout_marginBottom="489dp"
+        android:layout_marginTop="149dp"
+        android:layout_marginBottom="523dp"
+        android:hint="Full Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="468dp"
         android:hint="Username"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/emailEditText"
-        android:layout_width="376dp"
-        android:layout_height="200dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="295dp"
-        android:layout_marginBottom="396dp"
+        android:layout_marginTop="286dp"
+        android:layout_marginBottom="389dp"
         android:hint="Email Address"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="381dp"
-        android:layout_height="214dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginBottom="277dp"
+        android:layout_marginTop="352dp"
+        android:layout_marginBottom="325dp"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/fullNameEditText"
-        android:layout_width="382dp"
-        android:layout_height="202dp"
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="589dp"
-        android:hint="Full Name"
-        android:inputType="text" />
+        android:layout_marginTop="424dp"
+        android:layout_marginBottom="253dp"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
-        android:layout_height="179dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="563dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="149dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="547dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="160dp"
         android:background="#F1E2E2"
         android:text="REGISTER"
         android:textColor="@color/black"
@@ -77,34 +93,35 @@
     <TextView
         android:id="@+id/have_account"
         android:layout_width="wrap_content"
-        android:layout_height="174dp"
+        android:layout_height="33dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="648dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="613dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="83dp"
         android:text="Already have an account?"
+        android:textColor="@color/black"
         android:textSize="21sp" />
 
     <TextView
         android:id="@+id/clickable_login"
         android:layout_width="wrap_content"
-        android:layout_height="177dp"
+        android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="288dp"
-        android:layout_marginTop="647dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="67dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="171dp"
+        android:layout_marginBottom="50dp"
         android:clickable="true"
         android:onClick="onTextViewClick"
         android:text="Log In"
-        android:textColor="#91DDE6"
+        android:textColor="#009688"
         android:textSize="21sp" />
 
 </RelativeLayout>
