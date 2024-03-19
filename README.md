@@ -1,23 +1,70 @@
-# Travel Diary App
+# Travel Diary Android App
 
 ## Overview
 
-Welcome to the Travel Diary App, a project developed by **Md Mazharul Islam** and **Md Arham Ahmmad Adil** for the Project 250 course. This Android application is designed to serve as a personal travel companion, allowing users to document and relive their travel experiences effortlessly.
+Welcome to the Travel Diary Android App, a project developed by [Md. Mazharul Islam](https://github.com/mazhar75) and **Md Arham Ahmmad Adil** (me) for the Project 250 course. This project designed to help users document their travel experiences. This application, developed using Kotlin and Java, integrates various technologies such as RoomDB, Firebase, and Firestore to provide a comprehensive travel diary experience.
 
 ## Features
 
-- **User Authentication:** Securely log in to the app to access personalized travel diaries.
-- **Create Diary Entries:** Capture and record your travel memories, including photos, locations, and notes.
-- **Firebase Integration:** Utilizes Firebase for real-time data storage and authentication, ensuring a seamless and scalable experience.
-- **View and Edit Diaries:** Easily revisit your past adventures, edit entries, and add new content.
+### User Authentication
 
-## Getting Started
+- Sign up and sign in securely to access personalized travel diaries.
+
+### Diary Management
+
+- Create and delete travel diaries.
+- Pin/unpin diaries for easy access.
+- Share/unshare diaries with others.
+- Customize diary colors.
+- Upload, delete, and display images within diaries.
+
+### User Profile Settings
+
+- Customize user profile settings to personalize the app experience.
+
+### Diary Search
+
+- Easily search for specific diary entries.
+
+### Location Services
+
+- Utilizes Google Maps API to provide current location information.
+
+## Libraries Used
+
+- Picasso: For efficient image loading and displaying.
+- SDP (ScalableDP) and SSP (ScalableSP): For consistent UI across different screen sizes.
+
+## Limitations
+
+1. **Device-Dependent Data:** Diary content is stored locally using RoomDB, so content is only available on the device where it was created.
+2. **Limited Image Visibility:** Users can't view images uploaded by other users for a specific diary.
+3. **No Password Recovery:** Currently, there is no mechanism for password recovery.
+4. **No Content Recovery:** Deleted content cannot be recovered.
+
+### Some snapshots of the project
+
+![entry](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\app-entry-page-first-time.jpg)
+
+![home](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\home-page-after-user-login.jpg)
+
+![navigation-options](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\home-page-navigation-options.jpg)
+
+![diary](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\my-diaries.jpg)
+
+![diary-features](F:\Project\Android\Project250\TravelDiary\app-ui-snapshots\diary-features.jpg)
 
 ### Prerequisites
 
 - Android Studio
-- Kotlin programming language knowledge
+- Knowledge of Kotlin, Java programming language
 - Firebase account and project setup
+- RoomDB, DAO
+
+### We took help from the following resources:
+- ChatGPT
+- YouTube
+
 
 ### Installation
 
